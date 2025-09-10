@@ -22,12 +22,12 @@
 		content: '';
 		z-index: 1;
 		position: absolute;
-		bottom: -111%;
+		bottom: -112%;
 		left: 50%;
 		transform: translate(-50%, 0%);
 		border-radius: 1000px;
 		width: 100%;
-		max-width: 721px;
+		max-width: 767px;
 		height: 200%;
 		background-color: var(--accent-light);
 	}
@@ -38,6 +38,32 @@
 
 		@include mobile {
 			padding: 25px 10px 0px 10px;
+		}
+	}
+
+	&__tips {
+		position: relative;
+		z-index: 10;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		max-width: 767px;
+
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 120%;
+		letter-spacing: -0.04em;
+		text-transform: uppercase;
+		color: var(--text-color-light);
+
+		&__wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		&__wrapper:last-child {
+			text-align: right;
 		}
 	}
 
