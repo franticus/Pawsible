@@ -42,7 +42,7 @@
 .desktopOnly {
 	display: block;
 
-	@include mobile {
+	@include tablet {
 		display: none;
 	}
 }
