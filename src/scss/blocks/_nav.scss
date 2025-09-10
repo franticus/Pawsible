@@ -99,12 +99,12 @@
 	transition: all 0.2s ease-in;
 	position: relative;
 
-	font-weight: 400;
-	font-size: 65px;
+	font-weight: 600;
+	font-size: 30px;
 	line-height: 100%;
-	letter-spacing: -0.01em;
+	letter-spacing: -0.04em;
 	text-transform: uppercase;
-	color: var(--text-color-dark);
+	color: var(--text-color-light);
 	border: none;
 
 	&::after {
@@ -112,6 +112,6 @@
 	}
 
 	&:hover {
-		color: var(--accent-dark);
+		color: var(--page-bg);
 	}
 }
