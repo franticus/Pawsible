@@ -148,4 +148,44 @@
 			font-size: 14px;
 		}
 	}
+
+	&__paw {
+		position: absolute;
+		z-index: 9;
+
+		&-1 {
+			top: 7%;
+			left: 10%;
+			width: 173px;
+			transform: rotate(15deg);
+		}
+
+		&-2 {
+			top: 15%;
+			right: 8%;
+			width: 147px;
+			transform: rotate(-15deg);
+		}
+
+		&-3 {
+			bottom: 38%;
+			left: 5%;
+			width: 63px;
+			transform: rotate(10deg);
+		}
+
+		&-4 {
+			bottom: 15%;
+			left: 12%;
+			width: 115px;
+			transform: rotate(-10deg);
+		}
+
+		&-5 {
+			bottom: 20%;
+			right: 15%;
+			width: 78px;
+			transform: rotate(-10deg);
+		}
+	}
 }
