@@ -1,11 +1,13 @@
-.about {
+.why {
 	font-family: var(--font-accent);
-	width: calc(100% - 80px);
-	max-width: 1520px;
-	margin: 0 auto;
-	background-color: var(--accent);
-	padding: 30px 20px;
-	border-radius: 50px;
+
+	& .subtitle span {
+		margin-bottom: 0;
+	}
+
+	& .title {
+		display: none;
+	}
 
 	&__content {
 		display: flex;

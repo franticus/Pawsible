@@ -1,7 +1,7 @@
 main {
 	display: flex;
 	flex-direction: column;
-	gap: 150px;
+	gap: 40px;
 
 	@include mobile {
 		gap: 60px;
