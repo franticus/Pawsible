@@ -16,6 +16,10 @@
 
 	@include mobile {
 		width: calc(100% - 20px);
+		height: 508px;
+		justify-content: start;
+		padding: 30px 20px;
+		border-radius: 20px;
 	}
 
 	&::after {
@@ -30,6 +34,10 @@
 		max-width: 767px;
 		height: 200%;
 		background-color: var(--accent-light);
+
+		@include mobile {
+			bottom: -120%;
+		}
 	}
 
 	.container {
@@ -56,10 +64,13 @@
 		text-transform: uppercase;
 		color: var(--text-color-light);
 
+		@include mobile {
+			font-size: 16px;
+		}
+
 		&__wrapper {
 			display: flex;
 			flex-direction: column;
-			gap: 4px;
 		}
 
 		&__wrapper:last-child {
@@ -94,17 +105,25 @@
 		left: 50%;
 		transform: translate(-50%, 0%);
 		z-index: 10;
+		padding: 10px;
+
+		@include mobile {
+			width: 100%;
+			padding-bottom: 25px;
+		}
 	}
 
 	&__img {
 		position: absolute;
-		bottom: 0;
+		bottom: -140px;
 		left: 50%;
 		transform: translateX(-50%);
 		min-width: 721px;
 
 		@include mobile {
-			min-width: 278px;
+			bottom: 0;
+			min-width: auto;
+			max-width: 278px;
 		}
 	}
 
@@ -143,8 +162,8 @@
 		margin-bottom: 30px;
 
 		@include mobile {
-			margin-bottom: 20px;
-			max-width: 270px;
+			margin-bottom: 15px;
+			max-width: 200px;
 			font-size: 14px;
 		}
 	}
