@@ -1,5 +1,4 @@
 .form {
-	font-family: var(--font-accent);
 	position: relative;
 	width: 100vw;
 	max-width: 1600px;
@@ -7,7 +6,6 @@
 	padding: 90px 10px;
 	overflow: hidden;
 	background: transparent;
-	border-radius: 0;
 
 	@include mobile {
 		padding: 50px 10px;
@@ -17,31 +15,6 @@
 		@include mobile {
 			padding: 0;
 		}
-	}
-
-	&::before {
-		content: "";
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 0;
-		width: 1285px;
-		height: 591px;
-		aspect-ratio: 3 / 1.25;
-		background: var(--accent-dark);
-		border-radius: 100% / 100%;
-
-		@include mobile {
-			height: 463px;
-		}
-	}
-
-	>.container,
-	.contact__form,
-	&__title {
-		position: relative;
-		z-index: 1;
 	}
 
 	&__title {
@@ -71,12 +44,11 @@
 
 		& input,
 		textarea {
-			font-family: var(--font-accent);
 			font-weight: 400;
 			font-size: 16px;
 			line-height: 110%;
 			letter-spacing: -0.04em;
-			color: var(--text-color-dark);
+			color: var(--text-color-light);
 			background-color: var(--page-bg);
 			padding: 10px 20px;
 			border-radius: 5px;

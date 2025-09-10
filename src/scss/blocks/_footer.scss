@@ -1,12 +1,15 @@
 .footer {
-	font-family: var(--font-accent);
 	margin-top: auto;
-	background-color: var(--text-color-dark);
+	background-color: var(--page-bg);
 	color: var(--text-color-light);
 	padding: 0;
 
 	& .container {
 		padding: 0;
+		background-color: var(--accent);
+		border-radius: 50px;
+		width: calc(100% - 80px);
+		max-width: 1520px;
 
 		@include mobile {
 			padding: 0;
@@ -124,7 +127,6 @@
 	& .border_wrapper {
 		position: relative;
 		padding-top: 60px;
-		border: 1px solid rgba(255, 255, 255, 0.3);
 		border-bottom: none;
 		height: 295px;
 
