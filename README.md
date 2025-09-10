@@ -1,4 +1,4 @@
-# Node
+# Pawsible
 
-[Deploy Node](https://franticus.github.io/Node/)
-[Repository link](https://github.com/franticus/Node)
+[Deploy Node](https://franticus.github.io/Pawsible/)
+[Repository link](https://github.com/franticus/Pawsible)

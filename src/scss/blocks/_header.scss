@@ -1,9 +1,7 @@
 .header {
 	display: flex;
 	align-items: center;
-	// padding: 15px 0;
-	height: 85px;
-	padding-bottom: 0;
+	padding: 25px 0;
 	font-family: var(--font-accent);
 	position: relative;
 	z-index: 99;
@@ -32,9 +30,8 @@
 	color: var(--text-color);
 	position: relative;
 	z-index: 999;
-	width: 78px;
-	min-width: 78px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	width: 127px;
+	min-width: 127px;
 
 	@include tablet {
 		border: none;

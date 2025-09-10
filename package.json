@@ -1,7 +1,7 @@
 {
-  "name": "gulp-starter-kit",
+  "name": "pawsible",
   "version": "1.0.0",
-  "description": "Custom Gulp build system for frontend development",
+  "description": "Template with Gulp, SCSS, HTML",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
