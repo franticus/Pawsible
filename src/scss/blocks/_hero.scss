@@ -2,95 +2,74 @@
 	font-family: var(--font-accent);
 	position: relative;
 	width: 100vw;
-	max-width: 1600px;
+	max-width: 1520px;
 	margin: 0 auto;
 	overflow: hidden;
+	background-color: var(--accent);
+	border-radius: 50px;
+	height: 826px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
 	.container {
 		padding: 120px 100px 45px 100px;
-		background-image: url('../../img/hero/hero_bg.png');
-		background-position: center bottom;
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
+		position: static;
 
 		@include mobile {
 			padding: 25px 10px 0px 10px;
-			background-size: 100% 80%;
-			background-position: 100% 0%;
-			background-image: url('../../img/hero/hero_bg_small@2x.png');
 		}
 	}
 
 	&__lines {
 		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
 
 		@include mobile {
 			margin: 40px auto;
 			margin-bottom: 20px;
 		}
-
-		&-left {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 30px;
-			transform: translateY(-40px);
-
-			&-1 {
-				width: 240px;
-			}
-
-			@include mobile {
-				transform: translateY(10px);
-			}
-		}
-
-		&-right {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-end;
-			gap: 30px;
-
-			transform: translateY(-90px);
-
-			@include mobile {
-				transform: translateY(10px);
-			}
-		}
 	}
 
 	&__line {
-		transform: translateY(-40px);
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 0%);
+
+		& img {
+			min-width: 278px;
+		}
+	}
+
+	&__content {
+		position: absolute;
+		bottom: 0px;
+		padding-bottom: 30px;
+		left: 50%;
+		transform: translate(-50%, 0%);
+	}
+
+	&__img {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		min-width: 721px;
 
 		@include mobile {
-			transform: translateY(-30px);
-		}
-
-		&-anim {
-			margin-top: -20px;
-			animation: upDown 3s infinite ease-in-out;
-			-webkit-animation: upDown 3s infinite ease-in-out;
-			-moz-animation: upDown 3s infinite ease-in-out;
-
-			animation-direction: alternate;
+			min-width: 278px;
 		}
 	}
 
 	&__title {
-		font-weight: 400;
-		font-size: clamp(80px, 12vw, 200px);
-		line-height: 80%;
-		letter-spacing: -0.01em;
-		text-transform: capitalize;
+		font-weight: 900;
+		font-size: 180px;
+		line-height: 100%;
+		letter-spacing: -0.04em;
+		text-transform: uppercase;
 		text-align: center;
 		color: var(--text-color-light);
-
-		-webkit-text-stroke: 2px var(--text-color-dark);
-		// paint-order: stroke fill;
-
-		text-shadow: -10px -10px 0 #2400c9;
 
 		margin: 0 auto;
 		white-space: nowrap;
@@ -102,19 +81,19 @@
 
 		@include mobile {
 			font-size: 80px;
-			text-shadow: -5px -5px 0 #2400c9;
 		}
 	}
 
 	&__text {
-		font-weight: 400;
+		font-weight: 500;
 		font-size: 16px;
-		line-height: 120%;
-		max-width: 375px;
-		margin: 0 auto;
+		line-height: 110%;
 		letter-spacing: -0.04em;
 		text-align: center;
-		color: var(--text-color);
+		max-width: 325px;
+		margin: 0 auto;
+		color: var(--text-color-light);
+		mix-blend-mode: difference;
 		margin-bottom: 30px;
 
 		@include mobile {

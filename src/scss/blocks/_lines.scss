@@ -6,7 +6,7 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-		width: calc(100% - 80px);
+		width: 100%;
 		max-width: 1600px;
 		margin: 0 auto;
 	}
@@ -16,8 +16,6 @@
 		max-width: 1600px;
 		position: relative;
 		overflow: hidden;
-		background-color: var(--accent-light);
-		border-radius: 5px;
 		gap: 40px;
 		display: flex;
 		flex-direction: column;
@@ -57,12 +55,12 @@
 		justify-content: center;
 
 		&-text {
-			font-weight: 400;
-			font-size: 300px;
-			line-height: 60%;
-			letter-spacing: -0.01em;
+			font-weight: 900;
+			font-size: 180px;
+			line-height: 100%;
+			letter-spacing: -0.04em;
 			text-transform: uppercase;
-			color: var(--text-color-dark);
+			color: var(--text-color-light);
 
 			@include mobile {
 				font-size: 80px;
