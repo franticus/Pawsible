@@ -1,0 +1,228 @@
+.numbers {
+	& .subtitle span {
+		margin-bottom: 0;
+	}
+
+	& .title {
+		display: none;
+	}
+
+	&__content {
+		--expanded: 593px;
+		--collapsed-min: 100px;
+		--overlap: 5px;
+		--slide-dur: .5s;
+		--fade-dur: .8s;
+
+		display: flex;
+		border-radius: 5px;
+		background: var(--accent-light);
+		overflow: hidden;
+		position: relative;
+		contain: layout paint;
+
+		@include tablet {
+			--expanded: 450px;
+		}
+
+		&__card:nth-child(1) {
+			z-index: 4;
+		}
+
+		&__card:nth-child(2) {
+			z-index: 3;
+		}
+
+		&__card:nth-child(3) {
+			z-index: 2;
+		}
+
+		&__card:nth-child(4) {
+			z-index: 1;
+		}
+
+		&__card {
+			overflow: hidden;
+			position: relative;
+			cursor: pointer;
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: start;
+			padding: 30px;
+			height: 372px;
+			border-radius: 5px;
+			min-width: 0;
+			transition: flex-basis var(--slide-dur) ease, transform .3s ease;
+
+			/* нахлёст на больших брейкпоинтах */
+			margin-left: calc(-1 * var(--overlap));
+
+			flex: 0 0 auto;
+
+			&:first-child {
+				flex-basis: var(--expanded);
+				margin-left: 0;
+			}
+
+			&:not(:first-child) {
+				flex-basis: clamp(var(--collapsed-min), calc((100% - var(--expanded)) / 3), 33.333%);
+			}
+
+			&-title {
+				font-family: var(--font-second);
+				font-weight: 400;
+				font-size: clamp(56px, 12vw, 180px);
+				line-height: 60%;
+				text-transform: uppercase;
+				color: var(--accent-light);
+				white-space: nowrap;
+
+				@include tablet {
+					font-size: 100px;
+				}
+
+				@include mobile {
+					font-size: 150px;
+				}
+
+				span {
+					display: block;
+					font-size: clamp(20px, 4vw, 70px);
+					line-height: 70%;
+					margin-top: 10px;
+					white-space: normal;
+
+					@include mobile {
+						font-size: 30px;
+					}
+				}
+			}
+
+			&-description {
+				font-size: 16px;
+				line-height: 110%;
+				letter-spacing: -0.04em;
+				color: rgba(255, 255, 255, .8);
+				overflow: hidden;
+				opacity: 1;
+				padding-right: 70px;
+				transition: opacity var(--fade-dur) ease-in-out;
+
+				@include tablet {
+					padding-right: 40px;
+				}
+
+				@include tablet_small {
+					margin-top: 35px;
+				}
+			}
+
+			&.dark {
+				background: var(--accent-dark);
+			}
+
+			&.light {
+				background: var(--accent-light);
+
+				.numbers__content__card-title {
+					color: var(--accent-dark);
+				}
+
+				.numbers__content__card-description {
+					color: rgba(15, 15, 15, .8);
+				}
+			}
+		}
+
+		&__card:not(:first-child) {
+			grid-template-columns: 0fr auto;
+
+			.numbers__content__card-description {
+				opacity: 0;
+				padding-right: 0;
+			}
+		}
+
+		&.is-hover {
+			>.numbers__content__card {
+				grid-template-columns: 0fr auto;
+				flex-basis: clamp(var(--collapsed-min), calc((100% - var(--expanded)) / 3), 33.333%);
+
+				.numbers__content__card-description {
+					opacity: 0;
+					padding-right: 0;
+				}
+			}
+
+			>.numbers__content__card.is-active {
+				grid-template-columns: 1fr auto;
+				flex-basis: var(--expanded);
+				z-index: 5;
+
+				.numbers__content__card-description {
+					opacity: 1;
+					padding-right: 70px;
+
+					@include tablet {
+						padding-right: 40px;
+					}
+				}
+			}
+		}
+
+		@include tablet_small {
+			--overlap: 0px;
+			flex-direction: column;
+			gap: 10px;
+			background: transparent;
+			transition: none;
+
+			&,
+			&.is-hover {
+
+				>.numbers__content__card,
+				>.numbers__content__card.is-active {
+					margin-left: 0;
+					cursor: default;
+					z-index: auto;
+					flex-basis: 100% !important;
+					width: 100%;
+					height: auto;
+					grid-template-columns: 1fr auto;
+					/* все открыты */
+					transition: none;
+
+					.numbers__content__card-description {
+						opacity: 1;
+						padding-right: 0;
+						transition: none;
+					}
+				}
+			}
+		}
+
+		@include mobile {
+			flex-direction: column;
+
+			&__card {
+				flex-basis: 100% !important;
+				height: auto;
+				grid-template-columns: 1fr;
+				display: flex;
+				flex-direction: column-reverse;
+				padding: 15px;
+
+				.numbers__content__card-description {
+					opacity: 1;
+					padding-right: 0;
+					font-size: 14px;
+				}
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			--slide-dur: .01s;
+			--fade-dur: .01s;
+		}
+	}
+}

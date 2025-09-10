@@ -1,0 +1,141 @@
+.form {
+	font-family: var(--font-accent);
+	position: relative;
+	width: 100vw;
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 90px 10px;
+	overflow: hidden;
+	background: transparent;
+	border-radius: 0;
+
+	@include mobile {
+		padding: 50px 10px;
+	}
+
+	& .container {
+		@include mobile {
+			padding: 0;
+		}
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 0;
+		width: 1285px;
+		height: 591px;
+		aspect-ratio: 3 / 1.25;
+		background: var(--accent-dark);
+		border-radius: 100% / 100%;
+
+		@include mobile {
+			height: 463px;
+		}
+	}
+
+	>.container,
+	.contact__form,
+	&__title {
+		position: relative;
+		z-index: 1;
+	}
+
+	&__title {
+		font-family: var(--font-second);
+		position: relative;
+		font-weight: 400;
+		font-size: 70px;
+		line-height: 60%;
+		text-transform: uppercase;
+		text-align: center;
+		color: var(--text-color-light);
+		margin: 0 auto 40px;
+		width: fit-content;
+		white-space: nowrap;
+
+		@include mobile {
+			font-size: 30px;
+			margin-bottom: 20px;
+		}
+	}
+
+	.contact__form {
+		display: flex;
+		flex-direction: column;
+		max-width: 468px;
+		margin: 0 auto;
+		gap: 10px;
+
+		& input,
+		textarea {
+			font-family: var(--font-accent);
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 110%;
+			letter-spacing: -0.04em;
+			color: var(--text-color-dark);
+			background-color: var(--page-bg);
+			padding: 10px 20px;
+			border-radius: 5px;
+			resize: none;
+			border: none;
+			outline: none;
+
+			@include mobile {
+				padding: 12px;
+				font-size: 14px;
+			}
+
+			&::placeholder {
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 110%;
+				letter-spacing: -0.04em;
+				color: rgba(124, 0, 0, 0.5);
+
+				@include mobile {
+					font-size: 14px;
+				}
+			}
+		}
+
+		& textarea {
+			height: 88px;
+		}
+
+		&-text {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 100%;
+			letter-spacing: -0.04em;
+			color: rgba(255, 255, 255, 0.5);
+
+			@include mobile {
+				font-size: 12px;
+			}
+
+			& a {
+				cursor: pointer;
+				color: rgba(255, 255, 255, 0.5);
+				transition: color 0.2s ease-in;
+
+				&:hover {
+					color: var(--text-color);
+				}
+			}
+		}
+	}
+
+	.main__button {
+		max-width: 100%;
+		margin-top: 20px;
+
+		@include mobile {
+			margin-top: 10px;
+		}
+	}
+}

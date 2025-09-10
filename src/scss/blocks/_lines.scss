@@ -1,0 +1,131 @@
+.lines {
+	position: relative;
+	overflow: hidden;
+
+	&_container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		width: calc(100% - 80px);
+		max-width: 1600px;
+		margin: 0 auto;
+	}
+
+	.content {
+		width: 100vw;
+		max-width: 1600px;
+		position: relative;
+		overflow: hidden;
+		background-color: var(--accent-light);
+		border-radius: 5px;
+		gap: 40px;
+		display: flex;
+		flex-direction: column;
+		padding: 40px 0;
+
+		@include mobile {
+			gap: 20px;
+		}
+	}
+
+	.cards {
+		display: flex;
+		gap: 40px;
+		width: max-content;
+
+		&:nth-child(1) {
+			animation: marquee 22s linear infinite;
+		}
+
+		&:nth-child(2) {
+			animation: marqueeReverse 28s linear infinite;
+		}
+
+		&:nth-child(3) {
+			animation: marquee 34s linear infinite;
+		}
+
+		&.paused {
+			animation-play-state: paused;
+		}
+	}
+
+	.card {
+		flex: 0 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&-text {
+			font-family: var(--font-second);
+			font-weight: 400;
+			font-size: 300px;
+			line-height: 60%;
+			letter-spacing: -0.01em;
+			text-transform: uppercase;
+			color: var(--text-color-dark);
+
+			@include mobile {
+				font-size: 80px;
+			}
+		}
+	}
+
+	.logo {
+		display: block;
+		height: 161px;
+		width: auto;
+	}
+
+	@include mobile {
+		&_container {
+			width: calc(100% - 20px);
+		}
+
+		.content {
+			gap: 10px;
+		}
+
+		.logo {
+			height: 43px;
+		}
+
+		.cards {
+			gap: 20px;
+
+			&:nth-child(1) {
+				animation: marquee 18s linear infinite;
+			}
+
+			&:nth-child(2) {
+				animation: marqueeReverse 22s linear infinite;
+			}
+
+			&:nth-child(3) {
+				animation: marquee 36s linear infinite;
+			}
+		}
+	}
+
+
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes marqueeReverse {
+	0% {
+		transform: translateX(-50%);
+	}
+
+	100% {
+		transform: translateX(0%);
+	}
+}

@@ -1,0 +1,135 @@
+.main__button {
+	position: relative;
+	/* якорь для искр */
+	isolation: isolate;
+	overflow: visible;
+
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 300px;
+	margin: 0 auto;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 100%;
+	height: 40px;
+	text-transform: uppercase;
+	background-color: var(--accent-dark);
+	color: var(--text-color-light);
+	--btn-spark: var(--accent-dark);
+	transition: all 0.2s ease-in;
+
+	&:hover {
+		transform: translateY(-1px);
+	}
+
+	@include mobile {
+		max-width: 100%;
+	}
+
+	&-text {
+		line-height: normal;
+	}
+
+	&.secondary {
+		background-color: var(--accent-light);
+		--btn-spark: var(--accent-light);
+		color: var(--text-color-dark);
+	}
+
+	&.transparent {
+		--btn-spark: var(--text-color);
+	}
+
+	--btn-spark: var(--accent-dark);
+
+	&.secondary {
+		--btn-spark: var(--accent-light);
+	}
+
+	&.transparent {
+		--btn-spark: var(--text-color);
+	}
+
+	.px-emitter {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 10px;
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.px-emitter.left {
+		left: 0px;
+	}
+
+	.px-emitter.right {
+		right: -10px;
+	}
+
+	.px {
+		position: absolute;
+		width: 6px;
+		height: 6px;
+		background: var(--btn-spark);
+		opacity: 0;
+		will-change: transform, opacity;
+		image-rendering: pixelated;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.px {
+			animation: none !important;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.px {
+			animation: none !important;
+		}
+	}
+}
+
+@keyframes px-fly-left {
+	0% {
+		transform: translateX(0) translateY(0);
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	70% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateX(-10px) translateY(var(--dy, 0));
+		opacity: 0;
+	}
+}
+
+@keyframes px-fly-right {
+	0% {
+		transform: translateX(0) translateY(0);
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	70% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateX(10px) translateY(var(--dy, 0));
+		opacity: 0;
+	}
+}

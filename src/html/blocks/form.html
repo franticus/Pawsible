@@ -1,0 +1,25 @@
+<section class="form" id="contacts">
+	<div class="container">
+		<h2 class="form__title">
+			<p>Send us an email</p>
+		</h2>
+
+		<form class="contact__form" action="../../php/thanks_form.php" method="post">
+			<input type="text" name="name" placeholder="Name" required>
+			<input type="email" name="email" placeholder="E-mail" required>
+			<input type="phone" name="phone" placeholder="Phone" required>
+			<textarea name="message" placeholder="Message" required></textarea>
+			<div class="contact__form-text">By clicking the "Send Message" button, you confirm your consent to the processing
+				of
+				personal data
+				and agree to the <a href="privacy-policy.html">privacy policy</a></div>
+
+			<button class="main__button secondary" name="submit" type="submit">
+				<span class="main__button-text">
+					Send the message
+				</span>
+			</button>
+		</form>
+	</div>
+
+</section>
