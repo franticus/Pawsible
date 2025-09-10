@@ -1,6 +1,7 @@
 .lines {
 	position: relative;
 	overflow: hidden;
+	z-index: 9;
 
 	&_container {
 		display: flex;

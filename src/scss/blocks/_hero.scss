@@ -1,17 +1,36 @@
 .hero {
 	font-family: var(--font-accent);
 	position: relative;
-	width: 100vw;
-	max-width: 1520px;
 	margin: 0 auto;
 	overflow: hidden;
+	width: calc(100% - 80px);
+	max-width: 1520px;
 	background-color: var(--accent);
+	padding: 0 40px;
 	border-radius: 50px;
 	height: 826px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
+	@include mobile {
+		width: calc(100% - 20px);
+	}
+
+	&::after {
+		content: '';
+		z-index: 1;
+		position: absolute;
+		bottom: -111%;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		border-radius: 1000px;
+		width: 100%;
+		max-width: 721px;
+		height: 200%;
+		background-color: var(--accent-light);
+	}
 
 	.container {
 		padding: 120px 100px 45px 100px;
@@ -48,6 +67,7 @@
 		padding-bottom: 30px;
 		left: 50%;
 		transform: translate(-50%, 0%);
+		z-index: 10;
 	}
 
 	&__img {
