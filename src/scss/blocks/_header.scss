@@ -7,7 +7,7 @@
 	z-index: 99;
 
 	@include mobile {
-		height: 55px;
+		padding: 15px 0 20px 0;
 	}
 
 	.container {
@@ -36,6 +36,5 @@
 	@include tablet {
 		border: none;
 		padding: 0;
-		margin: 10px 0;
 	}
 }
