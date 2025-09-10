@@ -2,7 +2,11 @@
 	position: relative;
 	overflow: hidden;
 	z-index: 9;
-	margin-bottom: 8%;
+	margin-bottom: 160px;
+
+	@include mobile {
+		margin-bottom: 80px;
+	}
 
 	&_container {
 		display: flex;
@@ -64,7 +68,7 @@
 			color: var(--text-color-light);
 
 			@include mobile {
-				font-size: 80px;
+				font-size: 50px;
 			}
 		}
 	}
