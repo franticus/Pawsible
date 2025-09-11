@@ -14,26 +14,48 @@
 		border-radius: 50px;
 		width: calc(100% - 80px);
 		max-width: 1520px;
+
+		@include mobile {
+			width: calc(100% - 20px);
+			padding: 45px 10px;
+			padding-bottom: 10px;
+			border-radius: 20px;
+		}
 	}
 
 	&__logo-img {
 		margin: 0 auto;
 		margin-bottom: 40px;
+
+		@include tablet_small {
+			margin-bottom: 20px;
+		}
 	}
 
 	&__logo-dog {
 		grid-column: 2 / 4;
 		margin: 0 auto;
 		margin-bottom: 40px;
+
+		@include tablet_small {
+			grid-column: 1 / -1;
+			margin-top: 20px;
+			margin-bottom: 30px;
+		}
 	}
 
 	&__links {
 		display: grid;
 		column-gap: 0;
 		grid-template-columns: repeat(4, 1fr);
+
+		@include tablet_small {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 
 	&__link {
+		display: inline-block;
 		white-space: nowrap;
 		position: relative;
 		display: inline-block;
@@ -73,24 +95,44 @@
 			gap: 30px;
 			padding-left: 25px;
 
-			@include mobile {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
+			@include tablet_small {
+				grid-row: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				padding-left: 10px;
 			}
 		}
 
 		&__social {
-			grid-column: 4 / -1;
+			grid-column: 4;
+			grid-row: 1;
 			padding-right: 25px;
 			width: 100%;
 			display: flex;
 			flex-direction: column;
 			gap: 15px;
 
+			@include tablet_small {
+				grid-column: 2;
+				grid-row: 1;
+				padding-right: 10px;
+				gap: 10px;
+			}
+
 			&-item {
 				display: flex;
 				justify-content: space-between;
 				gap: 10px;
+
+				@include tablet_small {
+					flex-direction: column;
+					justify-content: flex-end;
+					align-items: flex-end;
+					text-align: right;
+					gap: 5px;
+					font-size: 14px;
+				}
 			}
 
 			&-title {
@@ -99,10 +141,20 @@
 				line-height: 100%;
 				letter-spacing: -0.04em;
 				color: rgba(255, 255, 255, 0.5);
+
+				@include tablet_small {
+					font-size: 14px;
+				}
 			}
 
 			.inst_wrapper {
 				text-align: right;
+
+				@include tablet_small {
+					display: flex;
+					flex-direction: column;
+					gap: 5px;
+				}
 			}
 		}
 	}
@@ -118,6 +170,10 @@
 		letter-spacing: -0.04em;
 		color: rgba(255, 255, 255, 0.5);
 
+		@include tablet_small {
+			font-size: 10px;
+		}
+
 		& a {
 			position: relative;
 			font-weight: 400;
@@ -125,6 +181,10 @@
 			line-height: 100%;
 			letter-spacing: -0.04em;
 			color: rgba(255, 255, 255, 0.5);
+
+			@include tablet_small {
+				font-size: 10px;
+			}
 
 			&::after {
 				content: "";
