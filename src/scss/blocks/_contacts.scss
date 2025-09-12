@@ -1,4 +1,4 @@
-.benefits {
+.contacts {
 	width: calc(100% - 80px);
 	max-width: 1520px;
 	margin: 0 auto;
@@ -108,11 +108,8 @@
 			letter-spacing: -0.04em;
 			color: rgba(255, 255, 255, 0.8);
 			margin-bottom: 30px;
+			margin-top: 30px;
 			max-width: 251px;
-
-			@media (max-width: 1570px) {
-				margin-top: 30px;
-			}
 
 			@include mobile {
 				grid-column: 1 / -1;
