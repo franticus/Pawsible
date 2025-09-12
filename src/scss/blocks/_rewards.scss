@@ -16,6 +16,10 @@
 		margin-top: 40px;
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
+
+		@include mobile {
+			margin-top: 20px;
+		}
 	}
 
 	.rewards__card {
@@ -25,8 +29,15 @@
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-column: 1 / -1;
-
 		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+		@include mobile {
+			display: flex;
+			align-items: center;
+			padding: 15px 0px;
+			margin-left: 0px;
+			margin-right: 0px;
+		}
 
 		&-index {
 			grid-column: 1;
@@ -35,6 +46,11 @@
 			line-height: 110%;
 			letter-spacing: -0.04em;
 			color: rgba(255, 255, 255, 0.8);
+
+			@include mobile {
+				font-size: 14px;
+				margin-right: 10px;
+			}
 		}
 
 		&-title {
@@ -46,6 +62,10 @@
 			text-transform: uppercase;
 			color: var(--text-color-light);
 
+			@include mobile {
+				font-size: 18px;
+			}
+
 			& sup {
 				font-style: italic;
 				font-weight: 400;
@@ -54,6 +74,10 @@
 				letter-spacing: -0.04em;
 				text-transform: uppercase;
 				color: rgba(255, 255, 255, 0.8);
+
+				@include mobile {
+					font-size: 10px;
+				}
 			}
 		}
 	}
