@@ -56,6 +56,13 @@
 			margin: 0;
 		}
 
+		@include mobile {
+			width: 280px;
+			min-width: 280px;
+			height: 280px;
+			min-height: 280px;
+		}
+
 		&-title {
 			font-weight: 500;
 			font-size: 18px;
@@ -181,6 +188,15 @@
 			top: 62%;
 			left: 93%;
 			transform: rotate(20deg);
+		}
+
+		@include mobile {
+			&-1 {
+				z-index: 11;
+				top: 5%;
+				left: -14%;
+				transform: rotate(-30deg);
+			}
 		}
 	}
 }
