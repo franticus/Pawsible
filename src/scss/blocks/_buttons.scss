@@ -25,9 +25,9 @@
 		color: var(--text-color-dark);
 	}
 
-	@include mobile {
-		max-width: 100%;
-	}
+	// @include mobile {
+	// 	max-width: 100%;
+	// }
 
 	&-text {
 		line-height: normal;
@@ -41,6 +41,7 @@
 
 	&.transparent {
 		--btn-spark: var(--text-color);
+		border: 1px solid var(--text-color-light);
 	}
 
 	--btn-spark: var(--accent-dark);
