@@ -99,7 +99,7 @@ function initDesktop(root) {
   });
 }
 
-/* ========================= MOBILE (свайп) ========================= */
+/* ========================= MOBILE (free scroll + динамическая opacity) ========================= */
 function initMobile(root) {
   const scope = root.querySelector('.text_wrapper-mobile');
   if (!scope) return;
@@ -110,120 +110,77 @@ function initMobile(root) {
   const slides = Array.from(track.querySelectorAll('.what__pet'));
   if (slides.length === 0) return;
 
-  // базовые стили для «слайдера» на мобильном без правки SCSS
-  scope.style.overflow = 'hidden';
-  track.style.display = 'flex';
-  track.style.flexDirection = 'row';
+  const MAX_CARD_W = 267;
+  const GAP = 10;
+
+  // убираем snap
+  track.style.scrollSnapType = 'none';
   track.style.overflowX = 'auto';
-  track.style.scrollSnapType = 'x mandatory';
-  track.style.scrollBehavior = 'smooth';
-  track.style.scrollbarWidth = 'none'; // Firefox (визуально)
-  track.style.gap = '0'; // цельные слайды
+  track.style.display = 'flex';
+  track.style.gap = GAP + 'px';
+  track.style.scrollBehavior = 'auto'; // свободный скролл
 
-  // чтобы iOS не «упруго» прыгал
-  track.addEventListener('touchmove', () => {}, { passive: true });
+  let cardW = MAX_CARD_W;
 
-  // размеры
-  const applySlideStyles = () => {
-    const w = scope.clientWidth;
+  const applyStyles = () => {
+    cardW = Math.min(MAX_CARD_W, scope.clientWidth - 1);
+    slides.forEach(s => {
+      s.style.flex = `0 0 ${cardW}px`;
+      s.style.width = `${cardW}px`;
+      s.style.transition = 'opacity 0.15s linear';
+    });
+    updateOpacity();
+  };
+
+  const updateOpacity = () => {
+    const leftEdge = track.scrollLeft;
     slides.forEach((s, i) => {
-      s.style.flex = '0 0 100%';
-      s.style.width = w + 'px';
-      s.style.scrollSnapAlign = 'start';
-      s.style.transition = 'opacity 200ms ease';
-      s.style.opacity = i === current ? '1' : '0.5';
+      const slideLeft = i * (cardW + GAP);
+      const dist = Math.max(0, slideLeft - leftEdge);
+      // 0px → 1.0, 200px → ~0.5, дальше → 0.3
+      const op = Math.max(0.3, 1 - dist / (cardW * 1.2));
+      s.style.opacity = op.toFixed(2);
     });
   };
 
-  // стартовый индекс по .active
-  let current = Math.max(
-    0,
-    slides.findIndex(s => s.classList.contains('active'))
-  );
-  if (current === -1) current = 0;
+  // дебаунс через rAF
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateOpacity();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 
-  // выставить стартовую позицию
-  const snapTo = i => {
-    current = (i + slides.length) % slides.length;
-    track.scrollTo({ left: current * scope.clientWidth, behavior: 'smooth' });
-    slides.forEach((s, idx) => {
-      s.classList.toggle('active', idx === current);
-      s.style.opacity = idx === current ? '1' : '0.5';
-      s.setAttribute('aria-current', idx === current ? 'true' : 'false');
-    });
-  };
-
-  // при ресайзе пересчитать ширину и «приклеиться» к текущему
-  const onResize = () => {
-    applySlideStyles();
-    track.scrollLeft = current * scope.clientWidth;
-  };
-  window.addEventListener('resize', onResize);
-
-  // определить текущий по положению скролла (округляем)
-  let scrollTimer;
-  track.addEventListener(
-    'scroll',
-    () => {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        const i = Math.round(track.scrollLeft / scope.clientWidth);
-        if (i !== current) {
-          current = i;
-          slides.forEach((s, idx) => {
-            s.classList.toggle('active', idx === current);
-            s.style.opacity = idx === current ? '1' : '0.5';
-          });
-        }
-      }, 80); // «дебаунс» окончания прокрутки
-    },
-    { passive: true }
-  );
-
-  // поддержка свайпа «броском» (Pointer события)
+  // свайп мышью / пальцем (pointer events)
+  let downId = null;
   let startX = 0;
   let startScroll = 0;
-  let isPointerDown = false;
-
   track.addEventListener('pointerdown', e => {
-    isPointerDown = true;
+    downId = e.pointerId;
     startX = e.clientX;
     startScroll = track.scrollLeft;
-    track.setPointerCapture(e.pointerId);
+    track.setPointerCapture(downId);
   });
 
   track.addEventListener('pointermove', e => {
-    if (!isPointerDown) return;
+    if (downId == null) return;
     const dx = startX - e.clientX;
     track.scrollLeft = startScroll + dx;
   });
 
   track.addEventListener('pointerup', e => {
-    if (!isPointerDown) return;
-    isPointerDown = false;
-    track.releasePointerCapture(e.pointerId);
-
-    const dx = startX - e.clientX;
-    const threshold = scope.clientWidth * 0.15; // 15% ширины для перелистывания
-    if (dx > threshold) {
-      snapTo(current + 1);
-    } else if (dx < -threshold) {
-      snapTo(current - 1);
-    } else {
-      snapTo(current); // вернуть на место
-    }
+    if (downId == null) return;
+    track.releasePointerCapture(downId);
+    downId = null;
   });
 
-  // клик по слайду — тоже перейти (если захотите)
-  slides.forEach((s, i) => {
-    s.style.cursor = 'pointer';
-    s.addEventListener('click', () => snapTo(i));
-  });
+  // при ресайзе пересчёт ширин
+  window.addEventListener('resize', applyStyles);
 
-  // первичная инициализация
-  applySlideStyles();
-  // если .active не первый — прокрутим к нему
-  if (current !== 0) {
-    track.scrollLeft = current * scope.clientWidth;
-  }
+  applyStyles();
+  updateOpacity();
 }

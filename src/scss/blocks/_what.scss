@@ -6,9 +6,16 @@
 	padding: 60px 25px;
 	border-radius: 50px;
 
+	@include tablet_small {
+		padding: 45px 10px;
+		padding-right: 0;
+		border-radius: 20px;
+	}
+
 	@include mobile {
 		width: calc(100% - 20px);
 		padding: 45px 10px;
+		padding-right: 0;
 		border-radius: 20px;
 	}
 
@@ -126,12 +133,18 @@
 			display: flex;
 		}
 
+		.what__pets {
+			display: flex;
+			flex-direction: row;
+		}
+
 		.what__pet {
 			display: flex;
 			flex-direction: column;
 			opacity: 0.5;
 			transition: all 0.2s ease-in-out;
 			width: 267px;
+			cursor: pointer;
 
 			&-profile {
 				display: flex;
@@ -163,4 +176,13 @@
 			}
 		}
 	}
+}
+
+.text_wrapper-mobile .what__pets {
+	scroll-snap-type: none; // убрали snap
+}
+
+.text_wrapper-mobile .what__pet {
+	opacity: 0.3; // базовое значение (увеличится в JS)
+	transition: opacity 0.15s linear;
 }
