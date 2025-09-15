@@ -128,6 +128,7 @@
 
 	.text_wrapper-mobile {
 		display: none;
+		margin-bottom: 0;
 
 		@include tablet_small {
 			display: flex;
@@ -154,7 +155,7 @@
 				width: 130px;
 				height: 130px;
 				margin-right: 10px;
-				margin-bottom: 15px;
+				margin-bottom: 10px;
 			}
 
 			&.active {
@@ -163,12 +164,12 @@
 				.what__pet-img {
 					width: 125px;
 					height: 125px;
-					margin-right: 15px;
+					margin-right: 10px;
 				}
 			}
 
 			&-name {
-				font-size: 14px;
+				font-size: 13px;
 			}
 
 			&-instagram {
@@ -184,5 +185,15 @@
 
 .text_wrapper-mobile .what__pet {
 	opacity: 0.3; // базовое значение (увеличится в JS)
+	transition: opacity 0.15s linear;
+}
+
+.text_wrapper-mobile .what__pets {
+	scroll-snap-type: none; // по умолчанию
+	-webkit-overflow-scrolling: touch;
+}
+
+.text_wrapper-mobile .what__pet {
+	opacity: 0.3;
 	transition: opacity 0.15s linear;
 }

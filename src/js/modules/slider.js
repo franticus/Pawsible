@@ -99,7 +99,7 @@ function initDesktop(root) {
   });
 }
 
-/* ========================= MOBILE (free scroll + динамическая opacity) ========================= */
+/* ========================= MOBILE (free-scroll >=470px, snap-by-1 <470px) ========================= */
 function initMobile(root) {
   const scope = root.querySelector('.text_wrapper-mobile');
   if (!scope) return;
@@ -113,53 +113,112 @@ function initMobile(root) {
   const MAX_CARD_W = 267;
   const GAP = 10;
 
-  // убираем snap
-  track.style.scrollSnapType = 'none';
-  track.style.overflowX = 'auto';
-  track.style.display = 'flex';
-  track.style.gap = GAP + 'px';
-  track.style.scrollBehavior = 'auto'; // свободный скролл
-
   let cardW = MAX_CARD_W;
+  let useSnap = false; // <470px — включаем
+  let current = 0; // индекс активной карточки в slides
+
+  const step = () => cardW + GAP;
+  const offsetFor = i => i * step();
+
+  const setActive = i => {
+    current = Math.max(0, Math.min(i, slides.length - 1));
+    slides.forEach((s, idx) => {
+      const active = idx === current;
+      s.classList.toggle('active', active);
+      s.style.opacity = active ? '1' : '0.5';
+      s.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  };
+
+  const snapTo = i => {
+    setActive(i);
+    track.scrollTo({ left: offsetFor(current), behavior: 'smooth' });
+  };
+
+  const nearestIndex = () => {
+    return Math.round(track.scrollLeft / step());
+  };
 
   const applyStyles = () => {
     cardW = Math.min(MAX_CARD_W, scope.clientWidth - 1);
+    useSnap = scope.clientWidth < 470;
+
+    track.style.display = 'flex';
+    track.style.gap = GAP + 'px';
+    track.style.overflowX = 'auto';
+    track.style.scrollbarWidth = 'none';
+
+    // переключаем режимы
+    if (useSnap) {
+      track.style.scrollBehavior = 'smooth';
+      track.style.scrollSnapType = 'x mandatory';
+    } else {
+      track.style.scrollBehavior = 'auto';
+      track.style.scrollSnapType = 'none';
+    }
+
     slides.forEach(s => {
       s.style.flex = `0 0 ${cardW}px`;
       s.style.width = `${cardW}px`;
       s.style.transition = 'opacity 0.15s linear';
+      if (useSnap) {
+        s.style.scrollSnapAlign = 'start';
+        s.style.scrollSnapStop = 'always'; // чтобы листалось по одной карточке
+      } else {
+        s.style.scrollSnapAlign = 'none';
+        s.style.scrollSnapStop = '';
+      }
     });
-    updateOpacity();
+
+    // перерасчёт позиции
+    if (useSnap) {
+      // в снапе выставляем точный оффсет текущего
+      track.scrollLeft = offsetFor(current);
+      setActive(current); // активная 1, остальные 0.5
+    } else {
+      // свободный режим — динамическая прозрачность
+      updateOpacityFree();
+    }
   };
 
-  const updateOpacity = () => {
+  const updateOpacityFree = () => {
+    if (useSnap) return; // в снапе управляем через active
     const leftEdge = track.scrollLeft;
     slides.forEach((s, i) => {
       const slideLeft = i * (cardW + GAP);
       const dist = Math.max(0, slideLeft - leftEdge);
-      // 0px → 1.0, 200px → ~0.5, дальше → 0.3
       const op = Math.max(0.3, 1 - dist / (cardW * 1.2));
       s.style.opacity = op.toFixed(2);
+      s.classList.toggle('active', false); // в свободном режиме active не используется
     });
   };
 
-  // дебаунс через rAF
+  // rAF-дребезг для scroll
   let ticking = false;
   track.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => {
-        updateOpacity();
+        if (useSnap) {
+          // при снапе следим за ближайшим и подкрашиваем active/others
+          const i = nearestIndex();
+          if (i !== current) setActive(i);
+        } else {
+          updateOpacityFree();
+        }
         ticking = false;
       });
       ticking = true;
     }
   });
 
-  // свайп мышью / пальцем (pointer events)
+  // Pointer drag: в свободном режиме — кастомное перетягивание,
+  // в snap — оставляем нативный скролл (браузер сам липнет по одной карточке)
   let downId = null;
   let startX = 0;
   let startScroll = 0;
+
   track.addEventListener('pointerdown', e => {
+    if (useSnap) return; // в снапе достаточно нативного поведения
     downId = e.pointerId;
     startX = e.clientX;
     startScroll = track.scrollLeft;
@@ -178,9 +237,23 @@ function initMobile(root) {
     downId = null;
   });
 
-  // при ресайзе пересчёт ширин
+  // клик по карточке — перейти к ней (в обоих режимах)
+  slides.forEach((s, i) => {
+    s.style.cursor = 'pointer';
+    s.addEventListener('click', () => {
+      if (useSnap) snapTo(i);
+      else track.scrollTo({ left: offsetFor(i), behavior: 'smooth' });
+    });
+  });
+
   window.addEventListener('resize', applyStyles);
 
+  // init
   applyStyles();
-  updateOpacity();
+  if (useSnap) {
+    // ровно выставим стартовый active
+    snapTo(current);
+  } else {
+    updateOpacityFree();
+  }
 }
