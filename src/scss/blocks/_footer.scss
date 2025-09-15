@@ -43,6 +43,10 @@
 			margin-top: 20px;
 			margin-bottom: 30px;
 		}
+
+		@include mobile {
+			grid-row: 3;
+		}
 	}
 
 	&__links {
