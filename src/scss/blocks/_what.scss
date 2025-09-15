@@ -95,6 +95,12 @@
 		justify-content: space-between;
 		border: 1px solid rgba(255, 255, 255, 0.5);
 		border-radius: 10px;
+
+		@media (max-width: 1400px) {
+			grid-column: 3;
+			justify-self: start;
+			align-self: end;
+		}
 	}
 
 	.control_button {
@@ -104,6 +110,20 @@
 
 		&-right {
 			transform: rotate(180deg);
+		}
+	}
+
+	.text_wrapper-desktop {
+		@include tablet_small {
+			display: none;
+		}
+	}
+
+	.text_wrapper-mobile {
+		display: none;
+
+		@include tablet_small {
+			display: flex;
 		}
 	}
 }
