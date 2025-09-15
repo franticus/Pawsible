@@ -21,7 +21,7 @@
 
 	@include mobile {
 		top: 70px;
-		height: 92%;
+		height: calc(100% - 80px);
 		padding: 40px 15px;
 	}
 }
