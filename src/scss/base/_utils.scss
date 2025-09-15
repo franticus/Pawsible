@@ -55,6 +55,14 @@
 	}
 }
 
+.tablet_smallOnly {
+	display: none;
+
+	@include tablet_small {
+		display: block;
+	}
+}
+
 .highlight {
 	color: var(--accent-light);
 
