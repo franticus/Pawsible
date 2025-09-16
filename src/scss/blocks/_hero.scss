@@ -20,11 +20,11 @@
 		border-radius: 20px;
 	}
 
-	// & .main__button {
-	// 	@include mobile {
-	// 		max-width: calc(100% - 20px);
-	// 	}
-	// }
+	& .main__button {
+		@include mobile {
+			max-width: calc(100% - 20px);
+		}
+	}
 
 	.container {
 		padding: 120px 100px 45px 100px;

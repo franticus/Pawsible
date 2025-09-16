@@ -111,6 +111,10 @@
 				gap: 5px;
 				padding-left: 10px;
 			}
+
+			@include mobile {
+				padding: 0;
+			}
 		}
 
 		&__social {
@@ -125,7 +129,7 @@
 			@include tablet_small {
 				grid-column: 2;
 				grid-row: 1;
-				padding-right: 10px;
+				padding-right: 0px;
 				gap: 10px;
 			}
 
@@ -157,12 +161,14 @@
 			}
 
 			.inst_wrapper {
+				display: flex;
 				text-align: right;
+				gap: 15px;
 
 				@include tablet_small {
 					display: flex;
 					flex-direction: column;
-					gap: 5px;
+					gap: 2px;
 				}
 			}
 		}
@@ -181,6 +187,10 @@
 
 		@include tablet_small {
 			font-size: 10px;
+		}
+
+		@include mobile {
+			padding: 0;
 		}
 
 		& a {

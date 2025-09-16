@@ -29,6 +29,11 @@
 
 	&__content {
 		z-index: 10;
+		margin-top: -10px;
+
+		@include mobile {
+			margin-top: -5px;
+		}
 	}
 
 	&__img {
